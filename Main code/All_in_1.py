@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import pandas as pd
 
 Arduino = pd.read_csv(r"C:\Users\boscu\Code\Data\Arduino text.txt", names=['Db']) # Read in data
@@ -25,15 +19,10 @@ from Model_trainer import rf,RandomForestRegressor,train_test_split,np
 input_data = {'Age': [val_age],
               'Noise level': [avg_val_Db],
               'Time exposure': [absolute_timer_alg],
-              'Earplugs': [0]
              }
 
 input_data = pd.DataFrame(input_data)
-input_labels = np.array(input_data['Earplugs']) # Labels are the values we want to predict
 
-input_data = input_data.drop('Earplugs', axis = 1) # Remove the labels from the features and axis 1 refers to the columns
-
-input_data_list = list(input_data.columns) # Saving factor names for later use
 input_data = np.array(input_data) # Convert to numpy array
 
 predictions = rf.predict(input_data)
@@ -56,6 +45,8 @@ if predictions[0] > 0.8 and predictions[0] < 1.5:
     )
     im1 = Image.open(r"C:\Users\boscu\Code\Images\1.png") 
     im1.show()
+    with open(r"C:\Users\boscu\Code\Data\Arduino text.txt",'r+') as file:
+        file.truncate(0)
     time.sleep(3600)
 elif predictions[0] > 1.5 and predictions[0] < 2.5:
     toast2 = ToastNotifier()
@@ -68,11 +59,6 @@ elif predictions[0] > 1.5 and predictions[0] < 2.5:
     )
     im2 = Image.open(r"C:\Users\boscu\Code\Images\2.png") 
     im2.show()
+    with open(r"C:\Users\boscu\Code\Data\Arduino text.txt",'r+') as file:
+        file.truncate(0)
     time.sleep(3600)
-
-
-# In[ ]:
-
-
-
-

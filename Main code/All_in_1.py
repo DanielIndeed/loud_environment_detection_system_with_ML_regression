@@ -1,6 +1,6 @@
 import pandas as pd
 
-Arduino = pd.read_csv(r"C:\Users\boscu\Code\Data\Arduino text.txt", names=['Db']) # Read in data
+Arduino = pd.read_csv(r"C:\Users\boscu\Code\Data\Arduino text.txt", names=['Db'])
 
 avg_val_Db = int(Arduino['Db'].mean())
 
@@ -23,7 +23,7 @@ input_data = {'Age': [val_age],
 
 input_data = pd.DataFrame(input_data)
 
-input_data = np.array(input_data) # Convert to numpy array
+input_data = np.array(input_data)
 
 predictions = rf.predict(input_data)
 
